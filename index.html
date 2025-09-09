@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>UX Analyzer using Six Sigma</title>
+  <meta name="description" content="Six Sigma VOC-driven UX feedback analyzer. Get insights, UI recommendations, accessibility checks, and exportable reports."/>
+  <!-- Swap this with your preferred font family if needed -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css"/>
+</head>
+<body>
+  <!-- Top Nav -->
+  <header class="nav">
+    <div class="nav__left">
+      <img src="assets/logo.svg" alt="UX logo" class="logo" onerror="this.style.display='none'"/>
+      <span class="brand">UX</span>
+    </div>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#/home" data-route class="is-active">Home</a>
+      <a href="#/analyzer" data-route>Analyzer</a>
+      <a href="#/voc" data-route>VOC Tools</a>
+      <a href="#/recommendations" data-route>Recommendations</a>
+      <a href="#/accessibility" data-route>Accessibility</a>
+      <a href="#/report" data-route>Report</a>
+    </nav>
+    <div class="nav__right">
+      <button id="ctaStart" class="btn btn--pill">Start</button>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1">
+    <!-- HOME -->
+    <section id="page-home" data-page>
+      <div class="hero">
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__inner">
+          <h1>UX Analyzer using<br/>Six Sigma</h1>
+          <p class="lede">
+            Transform user feedback into design improvements with our Six Sigma–powered analyzer.
+            Discover hidden pain points and build interfaces that truly resonate with your users.
+          </p>
+          <div class="cta-row">
+            <a href="#/analyzer" class="btn btn--primary">Start Analysis</a>
+            <a href="#/recommendations" class="btn btn--ghost">Learn More</a>
+          </div>
+
+          <figure class="hero__mock">
+            <!-- replace with your own illustration if you have one -->
+            <div class="mock-window">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <div class="mock-grid">
+                <div class="cell wide"></div>
+                <div class="cell"></div><div class="cell"></div>
+                <div class="cell"></div><div class="cell"></div>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2>Transforming Insights Into Better Design</h2>
+        <p class="section__lede">
+          With smart filters, industry-specific UI recommendations, and structured reports, our model helps teams
+          build intuitive, modern, and user-focused interfaces—bridging customer expectations with actionable strategies.
+        </p>
+
+        <div class="grid features">
+          <article class="card feature">
+            <h3>VOC-Driven Insights</h3>
+            <p>Capture and analyze Voice of Customer data to uncover true user needs.</p>
+          </article>
+          <article class="card feature">
+            <h3>Custom Filters</h3>
+            <p>Choose styles like Modern, Minimalist, or Playful for tailored UI suggestions.</p>
+          </article>
+          <article class="card feature">
+            <h3>Six-Sigma Precision</h3>
+            <p>Apply Affinity, Kano, and CTQs to elevate UX quality with measurable specs.</p>
+          </article>
+          <article class="card feature">
+            <h3>Data-Backed Reports</h3>
+            <p>Generate clear summaries that guide smarter product decisions.</p>
+          </article>
+        </div>
+      </section>  
+    </section>
+
+    <!-- ANALYZER -->
+    <section id="page-analyzer" data-page hidden>
+      <div class="section">
+        <h2>Analyzer</h2>
+        <form id="analysisForm" class="card form">
+          <div class="grid two">
+            <label>Domain / Topic*
+              <input type="text" id="domain" required placeholder="e.g., Healthcare management system"/>
+            </label>
+            <label>Audience
+              <input type="text" id="audience" placeholder="e.g., Clinicians, Admin staff"/>
+            </label>
+            <label>Top Tasks (comma-separated)
+              <input type="text" id="tasks" placeholder="Schedule appointments, View records"/>
+            </label>
+            <label>Competitors
+              <input type="text" id="competitors" placeholder="Epic, Cerner, Athena"/>
+            </label>
+          </div>
+
+          <label>VOC Statements (one per line)
+            <textarea id="voc" rows="5" placeholder="I need to find history within 3 clicks&#10;Dashboard is cluttered"></textarea>
+          </label>
+
+          <fieldset class="chips">
+            <legend>Style Filters</legend>
+            <label><input type="checkbox" name="style" value="modern"> Modern</label>
+            <label><input type="checkbox" name="style" value="minimalistic"> Minimalistic</label>
+            <label><input type="checkbox" name="style" value="corporate"> Corporate</label>
+            <label><input type="checkbox" name="style" value="playful"> Playful</label>
+            <label><input type="checkbox" name="style" value="futuristic"> Futuristic</label>
+          </fieldset>
+
+          <fieldset class="chips">
+            <legend>Pain Points</legend>
+            <label><input type="checkbox" name="pain" value="navigation"> Navigation</label>
+            <label><input type="checkbox" name="pain" value="usability"> Usability</label>
+            <label><input type="checkbox" name="pain" value="performance"> Performance</label>
+            <label><input type="checkbox" name="pain" value="visual"> Visual</label>
+            <label><input type="checkbox" name="pain" value="content"> Content</label>
+            <label><input type="checkbox" name="pain" value="accessibility"> Accessibility</label>
+            <label><input type="checkbox" name="pain" value="trust"> Trust/Security</label>
+          </fieldset>
+
+          <div class="form__actions">
+            <button class="btn btn--primary" type="submit">Analyze</button>
+            <button class="btn" type="reset">Reset</button>
+          </div>
+        </form>
+
+        <div id="analysisOutput" class="grid two"></div>
+      </div>
+    </section>
+
+    <!-- VOC TOOLS -->
+    <section id="page-voc" data-page hidden>
+      <div class="section">
+        <h2>VOC Tools</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>CTQ Tree</h3>
+            <div id="ctqTree"></div>
+          </div>
+          <div class="card">
+            <h3>Kano Sorter</h3>
+            <div class="row">
+              <input id="kanoFeature" class="input" placeholder="Feature name"/>
+              <select id="kanoClass" class="input">
+                <option value="must">Must-be</option>
+                <option value="performance">Performance</option>
+                <option value="delighter">Delighter</option>
+              </select>
+              <button id="addKano" class="btn">Add</button>
+            </div>
+            <div id="kanoLists" class="grid three"></div>
+          </div>
+          <div class="card">
+            <h3>Affinity Groups</h3>
+            <div id="affinityGroups" class="pill-groups"></div>
+          </div>
+          <div class="card">
+            <h3>Pareto of Issues</h3>
+            <div id="paretoBars" class="bars"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section id="page-recommendations" data-page hidden>
+      <div class="section">
+        <h2>Recommendations</h2>
+        <div id="domainRecs" class="grid two"></div>
+        <div class="grid two">
+          <div class="card">
+            <h3>Palette & Typography</h3>
+            <div id="palette" class="palette"></div>
+            <button id="testContrast" class="btn">Run Contrast Check</button>
+            <div id="contrastResults" class="contrast"></div>
+          </div>
+          <div class="card">
+            <h3>Component Checklist</h3>
+            <ul id="componentChecklist" class="checklist"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESSIBILITY -->
+    <section id="page-accessibility" data-page hidden>
+      <div class="section">
+        <h2>Accessibility</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>WCAG Checklist</h3>
+            <ul class="checklist">
+              <li>Keyboard navigable</li>
+              <li>Visible focus styles</li>
+              <li>Landmarks & semantic HTML</li>
+              <li>Color contrast ≥ 4.5:1</li>
+              <li>Form labels & error messages</li>
+              <li>ARIA used sparingly</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Nielsen Heuristics Score</h3>
+            <form id="heuristicsForm" class="heuristics">
+              <p>Rate 1–5 (5 is best). We’ll surface the lowest.</p>
+              <div class="grid two">
+                <label>Visibility of status <input type="number" min="1" max="5" name="h1" value="3"></label>
+                <label>Match to real world <input type="number" min="1" max="5" name="h2" value="3"></label>
+                <label>User control/freedom <input type="number" min="1" max="5" name="h3" value="3"></label>
+                <label>Consistency/standards <input type="number" min="1" max="5" name="h4" value="3"></label>
+                <label>Error prevention <input type="number" min="1" max="5" name="h5" value="3"></label>
+                <label>Recognition vs recall <input type="number" min="1" max="5" name="h6" value="3"></label>
+                <label>Flexibility/efficiency <input type="number" min="1" max="5" name="h7" value="3"></label>
+                <label>Aesthetic/minimalist <input type="number" min="1" max="5" name="h8" value="3"></label>
+                <label>Help users recover <input type="number" min="1" max="5" name="h9" value="3"></label>
+                <label>Help & docs <input type="number" min="1" max="5" name="h10" value="3"></label>
+              </div>
+              <button type="button" id="calcHeuristics" class="btn">Analyze Heuristics</button>
+            </form>
+            <div id="heuristicsOutput"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORT -->
+    <section id="page-report" data-page hidden>
+      <div class="section">
+        <h2>Report</h2>
+        <div id="reportPreview" class="report"></div>
+        <button id="exportReport" class="btn btn--primary">Export .html</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>UX ANALYZER</div>
+    <small>© 2025 Studio • All rights reserved</small>
+  </footer>
+
+  <dialog id="toast"><p id="toastMsg">Saved.</p><form method="dialog"><button class="btn">OK</button></form></dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
